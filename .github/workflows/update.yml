@@ -4,14 +4,24 @@ on:
   schedule:
     # 每天 UTC 2:00 = 北京时间 10:00
     - cron: "0 2 * * *"
-  workflow_dispatch:  # 支持手动触发
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+# 设置 GITHUB_TOKEN 权限
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# 确保只有一个部署在运行
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -38,3 +48,19 @@ jobs:
             git commit -m "自动更新直播源 $(date +'%Y-%m-%d')"
             git push
           fi
+
+      - name: 上传 Pages 产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
