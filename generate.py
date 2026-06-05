@@ -90,7 +90,8 @@ def generate(channels):
             txt_lines.append(f"{group},#genre#")
 
         for url in urls:
-            txt_lines.append(f"{name},{group},{url}")
+            # 影视仓两列格式
+            txt_lines.append(f"{name},{url}")
 
         # M3U
         best_url = urls[0]
