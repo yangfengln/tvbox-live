@@ -50,7 +50,8 @@ def generate(channels):
     # 写入文件
     import os
 
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    if OUTPUT_DIR != ".":
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
     out_path = os.path.join(OUTPUT_DIR, OUTPUT_FILE)
 
     content = "\n".join(lines)

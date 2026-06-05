@@ -7,12 +7,14 @@ tvbox 直播源采集配置
 # 支持 M3U 格式、tvbox TXT 格式、以及返回 JSON 的 API
 SOURCE_URLS = [
     # === GitHub 上维护的 IPTV 源 ===
-    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/global.m3u",
+    # YueChan Live - 国内85频道 IPv4/IPv6
+    "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/IPTV.m3u",
 
-    # "https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+    # wwb521 直播源 - M3U格式
+    "https://raw.bgithub.xyz/wwb521/live/refs/heads/main/tv.m3u",
 
-    # === 已知聚合 API ===
-    # "https://iptv-org.github.io/iptv/index.m3u",
+    # Guovin iptv-api 自动更新源 (CDN)
+    "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u",
 
     # === 添加你自己的源 ===
     # "https://example.com/my-live-sources.txt",
@@ -27,7 +29,7 @@ MAX_CONCURRENT = 50        # 并发验证数
 MAX_SOURCES_PER_CHANNEL = 3  # 每个频道最多保留的源地址数
 
 # ========== 输出 ==========
-OUTPUT_DIR = "output"
+OUTPUT_DIR = "."
 OUTPUT_FILE = "live.txt"
 OUTPUT_ENCODING = "utf-8"
 
